@@ -33,6 +33,7 @@ It's really to use. Just apply the wrapper to any function. Then when the functi
 		
 * This will send an email alert to your gmail account if some_func has an error
 		
+		
 		from try_then_alert import try_then_alert
 	
 		@try_then_alert
@@ -43,6 +44,7 @@ It's really to use. Just apply the wrapper to any function. Then when the functi
 			some_func()
 
 * This will send an email alert to your gmail account if some_func runs successfully
+		
 		
 		from try_then_alert import try_then_alert
 	
