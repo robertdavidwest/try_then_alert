@@ -23,7 +23,7 @@ def get_gmail_credentials():
         gmail = raw_input("Please enter your gmail address: ")            
         while confirm != '':
             confirm = raw_input('You entered: {}. If this is correct, hit enter.'
-                               'or you can re-enter: '.format(gmail))            
+                               ' Or you can re-enter: '.format(gmail))            
             if confirm != '':
                 gmail = confirm
 
