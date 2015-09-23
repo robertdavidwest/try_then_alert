@@ -1,6 +1,6 @@
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 # ----------------------------------------------------------------------
 # Methods
-from tools import try_then_alert
+from __tools import try_then_alert
 

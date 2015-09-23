@@ -5,6 +5,12 @@ from getpass import getuser
 import keyring
 
 def get_gmail_credentials():
+    """Stores gmail email address and password in the keyring
+    Returns
+    -------
+    credentials : dict
+        contains 'email' and 'password'
+    """
 
     # get system username 
     system_username = getuser()
@@ -99,4 +105,36 @@ def send_gmail(me, you, password, html, subject):
     # and message to send - here it is sent as one string.
     server.sendmail(me, you, msg.as_string())
     server.quit()
+
+
+def send_alert(html, subject, alert_recipients):
+    """Send alert meesage. If there is an error in sending the message it is
+    printed to the screen but it will not hault the original function call
+    """
+    try:
+        credentials = get_gmail_credentials()
+        if not alert_recipients:
+            alert_recipients = [credentials['email']]
+
+        if isinstance(alert_recipients, str):
+            alert_recipients = [alert_recipients]
+
+        for you in alert_recipients:
+            send_gmail(me=credentials['email'],
+                       you=you,
+                       password=credentials['password'],
+                       html=html,
+                       subject=subject)
+
+    except Exception as email_e:
+        # If the alert message fails, throw the original error and
+        # just print the send error to the user
+        print '--------------------'
+        print '   Alert not sent   '
+        print '--------------------'
+        print 'Email send error:'
+        print email_e.message
+        print email_e.strerror
+        print '--------------------'
+        print '--------------------'
 
