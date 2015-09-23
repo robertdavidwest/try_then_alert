@@ -32,6 +32,7 @@ This is designed to be used when you're running something that takes forever. Yo
 It's really to use. Just apply the wrapper to any function. Then when the function is called you will be alerted by email if there is an error in the execution, or, if the function call is successful depending on your preferences
 		
 * This will send an email alert to your gmail account if some_func has an error
+		
 		from try_then_alert import try_then_alert
 	
 		@try_then_alert
@@ -42,6 +43,7 @@ It's really to use. Just apply the wrapper to any function. Then when the functi
 			some_func()
 
 * This will send an email alert to your gmail account if some_func runs successfully
+		
 		from try_then_alert import try_then_alert
 	
 		@try_then_alert(alert_on_error=False, alert_on_completion=True)
