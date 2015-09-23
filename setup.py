@@ -1,6 +1,6 @@
 
 from distutils.core import setup
-from try_then_email import __version__
+from try_then_alert import __version__
 
 setup(
     name='try_then_alert',
@@ -13,7 +13,7 @@ setup(
                 ' will be sent',
     long_description=open('README.md').read(),
     install_requires=[
-        'smtplib',        
+        'smtplib',
         'email',
         'keyring',
         'getpass'
