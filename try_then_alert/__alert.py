@@ -134,7 +134,6 @@ def send_alert(html, subject, alert_recipients):
         print '--------------------'
         print 'Email send error:'
         print email_e.message
-        print email_e.strerror
         print '--------------------'
         print '--------------------'
 
