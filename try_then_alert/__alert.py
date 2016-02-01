@@ -53,7 +53,7 @@ def get_gmail_credentials():
     return credentials
 
 
-def send_gmail(me, you, password, html, subject):
+def send_gmail(me, you, password, html, text, subject):
     """send_email will send an email from the e-mail address 'me', to 'you'. 
     The email message sent is stored in 'html'.
      
@@ -67,6 +67,8 @@ def send_gmail(me, you, password, html, subject):
         the gmail user's password
     html : str
         the html e-mail message to be sent
+    text : str
+        the text alternative if recipient cannot receive html
     subject : str
         subject line of email
     """
@@ -80,10 +82,7 @@ def send_gmail(me, you, password, html, subject):
     msg['To'] = you
     
     # Create the body of the message (a plain-text and an HTML version).
-    # No text version available, just send a msg explaining the html is requied 
-    # to read email
-    text = 'html is required to read this e-mail'
-    
+
     # Record the MIME types of both parts - text/plain and text/html.
     part1 = MIMEText(text, 'plain')
     part2 = MIMEText(html, 'html')
@@ -107,7 +106,7 @@ def send_gmail(me, you, password, html, subject):
     server.quit()
 
 
-def send_alert(html, subject, alert_recipients):
+def send_alert(html, text, subject, alert_recipients):
     """Send alert meesage. If there is an error in sending the message it is
     printed to the screen but it will not hault the original function call
     """
@@ -124,6 +123,7 @@ def send_alert(html, subject, alert_recipients):
                        you=you,
                        password=credentials['password'],
                        html=html,
+                       text=text,
                        subject=subject)
 
     except Exception as email_e:

@@ -1,7 +1,7 @@
+import cgitb
 import sys
 import functools
 from __alert import send_alert
-
 
 def try_then_alert(function=None, 
                    alert_on_error=True, 
@@ -51,20 +51,22 @@ def try_then_alert(function=None,
         try:
             f = function(*args, **kwargs)
         except Exception as e:
-            # using exc_info captures traceback as well as error message
-            exc_info = sys.exc_info()
 
             if alert_on_error:
                 # if an error occurred send an error message
-                send_alert(html=exc_info[1],
+                send_alert(html=cgitb.html(sys.exc_info()),
+                           text=cgitb.text(sys.exc_info()),
                            subject=error_subject,
-                           alert_recipients=alert_recipients)  
+                           alert_recipients=alert_recipients)
 
+            # using exc_info captures traceback as well as error message
+            exc_info = sys.exc_info()
             raise exc_info[1], None, exc_info[2]
         else:
             if alert_on_completion:                
                 # if there are no errors send a run successful message
                 send_alert(html='',
+                           text='',
                            subject=completion_subject,
                            alert_recipients=alert_recipients)
 
